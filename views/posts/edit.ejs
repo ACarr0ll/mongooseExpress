@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit a Post!</title>
+</head>
+<body>
+  <h1>Edit a post!</h1>
+  <form action="/post/<%=post._id%>?_method=PUT" method="post">
+    <label for="name">Username</label>
+    <input type="text" name="name" id="name" placeholder="Username" value="<%=post.name%>"><br>
+    <label for="title">Title of Article</label>
+    <input type="text" name="title"  id="title" placeholder="Title" value="<%=post.title%>"><br>
+    <label for="body">Enter article body</label>
+    <textarea name="body" id="body" cols="30" rows="10" placeholder="Enter post body"><%=post.body%></textarea><br>
+    <button type="submit">Update Post</button>
+  </form>
+  
+
+  <a href="/post/<%=post._id%>">Cancel</a>
+</body>
+</html>
