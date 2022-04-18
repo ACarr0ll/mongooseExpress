@@ -51,6 +51,6 @@ app.put('/post/:id', async (req, res) => {
 })
 
 
-app.listen(3000, () => {
+app.listen(provess.env.PORT, () => {
   console.log("App is listening on port 3000")
 })
