@@ -5,13 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Posts</title>
+  <%- include('../partials/head') %>
 </head>
 <body>
-  <h1>Posts:  <a href="/posts/new"> Create a new post!</a></h1>
+
+  <header>
+    <%- include('../partials/navbar') %>
+  </header>
+  <h1>Posts:</h1>
   <ul>
      <% for(let post of posts) { %> 
       <li> <a href="/post/<%=post._id%>"><%= post.name %></a></li>
       <% } %>
   </ul>
+<%- include('../partials/bootstrap') %>
+
 </body>
 </html>
