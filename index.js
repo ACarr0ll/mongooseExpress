@@ -50,7 +50,12 @@ app.put('/post/:id', async (req, res) => {
   res.redirect(`/post/${post._id}`)
 })
 
+app.delete('/post/:id', async (req, res) => {
+  const { id } = req.params
+  const post = await Post.findByIdAndDelete(id)
+  res.redirect('/posts')
+})
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("App is listening on port 3000")
 })

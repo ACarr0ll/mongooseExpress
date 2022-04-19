@@ -14,8 +14,10 @@
     <li><%= post.body %></li>
   </ul>
 <br>
-<a href="/post/<%=post.id%>/edit">Edit Post</a>
+<a href="/post/<%=post.id%>/edit">Edit Post</a><br>
+<a href="/posts/">Home</a>
 <br>
-  <a href="/posts"> Post List</a>
+<form action="/post/<%=post._id%>?_method=DELETE" method="post">
+<button type="submit">Delete post</button></form>
 </body>
 </html>
