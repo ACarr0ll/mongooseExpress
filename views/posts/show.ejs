@@ -6,24 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= post.name %></title>
   <%- include('../partials/head') %>
+
 </head>
 <body>
   <header>
     <%- include('../partials/navbar') %>
   </header>
-  <h1><%= post.name %></h1>
-  <ul>
-    <li><%= post.name %></li>
-    <li><%= post.title %></li>
-    <li><%= post.body %></li>
-  </ul>
-<br>
-<a href="/post/<%=post.id%>/edit">Edit Post</a><br>
-<a href="/posts/">Home</a>
-<br>
-<form action="/post/<%=post._id%>?_method=DELETE" method="post">
-<button type="submit">Delete post</button></form>
-<%- include('../partials/bootstrap') %>
 
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= post.title %> by - <%= post.name %>
+      </h5>
+      <p class="card-text"><%= post.body %></p>
+      <a href="/post/<%=post.id%>/edit" class="btn btn-primary">Edit Post</a>    </div>
+  </div>
+  <form action="/post/<%=post._id%>?_method=DELETE" method="post">
+    <button type="submit">Delete post</button></form>
+<%- include('../partials/bootstrap') %>
 </body>
 </html>

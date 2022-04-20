@@ -13,11 +13,13 @@
     <%- include('../partials/navbar') %>
   </header>
   <h1>Posts:</h1>
-  <ul>
      <% for(let post of posts) { %> 
-      <li> <a href="/post/<%=post._id%>"><%= post.name %></a></li>
+      <div class="card">
+        <div class="card-body">
+          <a href="/post/<%=post._id%>"><%= post.name %></a>
+        </div>
+      </div>
       <% } %>
-  </ul>
 <%- include('../partials/bootstrap') %>
 
 </body>
