@@ -20,12 +20,6 @@
   background-color: #f3f3f3;
 }
 
-
-
-/* .nav-link {
-  color: white !important;
-} */
-
 .navbar-nav a:hover {
   color: var(--secondary-blue) !important;
 }
