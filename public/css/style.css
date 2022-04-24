@@ -8,8 +8,8 @@
 }
 
 #intro {
-  background: url('../images/FullSizeRender.jpeg') no-repeat center center/cover;
-  height: 60vh;
+  background: url('/images/FullSizeRender.jpeg') no-repeat center center/cover;
+  height: 50vh;
 }
 
 .logofont {
