@@ -1,28 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add a Post!</title>
-  <%- include('../partials/head') %>
-</head>
-<body>
-  <header>
-    <%- include('../partials/navbar') %>
-  </header>
+<% layout('/layouts/boilerplate') %>
   <h1>Add a post!</h1>
-  <form action="/posts" method="post">
-    <label for="name">Username</label>
-    <input type="text" name="name" id="name" placeholder="Username"><br>
-    <label for="title">Title of Article</label>
-    <input type="text" name="title"  id="title" placeholder="Title"><br>
-    <label for="body">Enter article body</label>
-    <textarea name="body" id="body" cols="30" rows="10" placeholder="Enter post body"></textarea><br>
-    <button type="submit">Add Post</button>
-  </form>
-  <%- include('../partials/bootstrap') %>
-  <%- include('../partials/footer') %>
 
-</body>
-</html>
+  <form action="/posts" method="post">
+    <div class="mb-3">
+      <label for="name" class="form-label">Username</label>
+      <input type="text" name="name" id="name" class="form-control" placeholder="Username">
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title of Article</label>
+      <input type="text" name="title"  id="title"  class="form-control" placeholder="Title">
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">Enter article body</label>
+      <textarea name="body" id="body" cols="30" rows="10" class="form-control" placeholder="Enter post body"></textarea>
+    </div>
+    <button type="submit" class="btn btn-info" >Add Post</button>
+  </form>

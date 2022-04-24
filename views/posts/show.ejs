@@ -1,29 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= post.name %></title>
-  <%- include('../partials/head') %>
-
-</head>
-<body>
-  <header>
-    <%- include('../partials/navbar') %>
-  </header>
-
-  <div class="card text-center w-50" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= post.title %> - <%= post.name %>
+<% layout('/layouts/boilerplate') %>
+<div class="mb-3">
+  <div class="card text-center">
+    <div class="card-header">
+      <h5><%= post.title %> - by <%= post.name %>
       </h5>
+      </div>
+      <div class="card-body">
       <p class="card-text"><%= post.body %></p>
-      <a href="/post/<%=post.id%>/edit" class="btn btn-primary">Edit Post</a>    </div>
+      <a href="/post/<%=post.id%>/edit" class="btn btn-primary">Edit Post</a>
+    </div>
   </div>
   <form action="/post/<%=post._id%>?_method=DELETE" method="post">
-    <button type="submit">Delete post</button></form>
-<%- include('../partials/bootstrap') %>
-<%- include('../partials/footer') %>
+  <button type="submit">Delete post</button></form>
+  </div>
 
-</body>
-</html>
+
