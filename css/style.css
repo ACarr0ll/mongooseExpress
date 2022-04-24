@@ -1,0 +1,35 @@
+:root {
+  --primary-blue: rgb(204, 204, 255);
+  --primary-green: rgb(204, 255, 229);
+  --secondary-blue: rgb(76, 76, 199);
+  --light-color: #f3f3f3;
+  --dark-color: #333;
+  --primary: #1266f1;
+}
+
+#intro {
+  background: url('../images/FullSizeRender.jpeg') no-repeat center center/cover;
+  height: 60vh;
+}
+
+.logofont {
+  color: #4c4cc7;
+}
+
+.bg-gray {
+  background-color: #f3f3f3;
+}
+
+
+
+/* .nav-link {
+  color: white !important;
+} */
+
+.navbar-nav a:hover {
+  color: var(--secondary-blue) !important;
+}
+
+.bgdark {
+  background-color: var(--dark-color);
+}
