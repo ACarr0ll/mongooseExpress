@@ -1,11 +1,7 @@
 const express = require('express')
 const app = express();
-// const session = require('express-session')
-
-const bp = require('body-parser')
-app.use(bp.json());
-app.use(bp.urlencoded({ extended: true }));
-
+const session = require('express-session')
+const bodyParser = require('body-parser')
 const path = require('path')
 const engine = require('ejs-mate')
 
@@ -23,26 +19,29 @@ const methodOverride = require('method-override')
 connectDB()
 
 
-// const sessionConfig = {
-//   secret: 'temporarysecret',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: {
-//     httpOnly: true,
-//     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-//     maxAge: 1000 * 60 * 60 * 24 * 7
-//   }
-// }
+const sessionConfig = {
+  secret: 'temporarysecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}
 
-// app.use(session(sessionConfig));
+const jsonParser = bodyParser.json()
+const urlencodedParser = bodyParser.urlencoded({ extended: true })
+
+app.use(session(sessionConfig));
 app.use(methodOverride('_method'))
 
-// app.use(passport.initialize())
-// app.use(passport.session())
-// passport.use(new local(User.authenticate()))
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new local(User.authenticate()))
 
-// passport.serializeUser(User.serializeUser())
-// passport.deserializeUser(User.deserializeUser())
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.engine('ejs', engine)
 app.set('views', path.join(__dirname, 'views'))
