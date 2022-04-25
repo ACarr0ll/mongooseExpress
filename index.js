@@ -1,15 +1,10 @@
 const express = require('express')
 const app = express();
 const session = require('express-session')
-const bodyParser = require('body-parser')
 const path = require('path')
 const engine = require('ejs-mate')
 
 const connectDB = require('./config/db')
-
-const passport = require('passport')
-const local = require('passport-local')
-const User = require('./models/user')
 
 const postRoutes = require('./routes/posts')
 const loginRoutes = require('./routes/login')
@@ -30,8 +25,6 @@ const sessionConfig = {
   }
 }
 
-const jsonParser = bodyParser.json()
-const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 app.use(session(sessionConfig));
 app.use(methodOverride('_method'))

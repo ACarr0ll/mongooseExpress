@@ -2,19 +2,23 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 const bodyParser = require('body-parser')
-
-const jsonParser = bodyParser.json()
+const LocalStrategy = require('passport-local');
+const passport = require('passport')
 const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 router.get('/', (req, res) => {
-  // const { user } = await DefaultUser.authenticate()('user', 'password');
   res.render('login/login')
 })
 
-router.post('/', urlencodedParser, async (req, res) => {
-  const { username, password } = req.body
-  const user = await User.authenticate(username, password);
-  res.send("SUCCESS")
+router.post('/', passport.authenticate('local', { failureFlash: false, failureRedirect: '/' }), (req, res) => {
+  res.redirect('/')
 })
 
 router.get('/register', (req, res) => {
