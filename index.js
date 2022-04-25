@@ -36,13 +36,6 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true })
 app.use(session(sessionConfig));
 app.use(methodOverride('_method'))
 
-app.use(passport.initialize())
-app.use(passport.session())
-passport.use(new local(User.authenticate()))
-
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
-
 app.engine('ejs', engine)
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')

@@ -11,6 +11,4 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(passport)
 
-const User = mongoose.model('User', UserSchema)
-
-module.exports = User
+module.exports = mongoose.model('User', UserSchema)
