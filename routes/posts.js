@@ -1,14 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const Post = require('../models/post')
-
+const LocalStrategy = require('passport-local');
+const passport = require('passport')
 router.get('/', async (req, res) => {
   const posts = await Post.find({})
   res.render('posts/index', { posts })
 })
 
 router.get('/new', (req, res) => {
-  res.render('posts/new')
+  if (!req.isAuthenticated()) {
+    res.send("Please register to create a new request!")
+  } else {
+    res.render('posts/new')
+  }
 })
 
 router.get('/:id/edit', async (req, res) => {

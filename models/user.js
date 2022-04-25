@@ -8,7 +8,6 @@ const UserSchema = new mongoose.Schema({
     unique: true
   }
 })
-
 UserSchema.plugin(passport)
 
 module.exports = mongoose.model('User', UserSchema)
