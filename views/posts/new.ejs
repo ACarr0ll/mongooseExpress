@@ -2,20 +2,23 @@
   <title>New post | The Carroll's Yes Year 2022 | Adventure | Hiking | Travel | Food</title>
 </head>
 <% layout('/layouts/boilerplate') %>
-  <h1>Add a post!</h1>
+  <div class="container-fluid p-3">
+    <h1>Add a post!</h1>
 
-  <form action="/posts" method="post">
-    <div class="mb-3">
-      <label for="name" class="form-label">Username</label>
-      <input type="text" name="name" id="name" class="form-control" placeholder="Username">
-    </div>
-    <div class="mb-3">
-      <label for="title" class="form-label">Title of Article</label>
-      <input type="text" name="title"  id="title"  class="form-control" placeholder="Title">
-    </div>
-    <div class="mb-3">
-      <label for="body" class="form-label">Enter article body</label>
-      <textarea name="body" id="body" cols="30" rows="10" class="form-control" placeholder="Enter post body"></textarea>
-    </div>
-    <button type="submit" class="btn btn-info" >Add Post</button>
-  </form>
+    <form action="/posts" method="post">
+      <div class="mb-3">
+        <label for="name" class="form-label">Username</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Username">
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title of Article</label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="Title">
+      </div>
+      <div class="mb-3">
+        <label for="body" class="form-label">Enter article body</label>
+        <textarea name="body" id="body" cols="30" rows="10" class="form-control"
+          placeholder="Enter post body"></textarea>
+      </div>
+      <button type="submit" class="btn btn-info">Add Post</button>
+    </form>
+  </div>

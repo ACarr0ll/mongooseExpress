@@ -2,16 +2,16 @@
   <title>Edit Post - The Carroll's Yes Year 2022 | Adventure | Hiking | Travel | Food</title>
 </head>
 <% layout('/layouts/boilerplate') %>
-  <h1>Edit a post!</h1>
-  <form action="/post/<%=post._id%>?_method=PUT" method="post">
-    <label for="name">Username</label>
-    <input type="text" name="name" id="name" placeholder="Username" value="<%=post.name%>"><br>
-    <label for="title">Title of Article</label>
-    <input type="text" name="title"  id="title" placeholder="Title" value="<%=post.title%>"><br>
-    <label for="body">Enter article body</label>
-    <textarea name="body" id="body" cols="30" rows="10" placeholder="Enter post body"><%=post.body%></textarea><br>
-    <button type="submit">Update Post</button>
-  </form>
-  <a href="/post/<%=post._id%>">Cancel</a>
-
-
+  <div class="container-fluid p-3">
+    <h1>Edit a post!</h1>
+    <form action="/posts/<%=post._id%>?_method=PUT" method="post">
+      <label for="name">Username</label>
+      <input type="text" name="name" id="name" placeholder="Username" value="<%=post.name%>"><br>
+      <label for="title">Title of Article</label>
+      <input type="text" name="title" id="title" placeholder="Title" value="<%=post.title%>"><br>
+      <label for="body">Enter article body</label>
+      <textarea name="body" id="body" cols="30" rows="10" placeholder="Enter post body"><%=post.body%></textarea><br>
+      <button type="submit">Update Post</button>
+    </form>
+    <a href="/posts/<%=post._id%>">Cancel</a>
+  </div>

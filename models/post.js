@@ -12,8 +12,7 @@ const postSchema = new mongoose.Schema({
   body: {
     type: String,
     required: true
-  },
-  image: String,
+  }
 })
 
 const Post = mongoose.model('Post', postSchema)

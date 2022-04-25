@@ -2,12 +2,15 @@
   <title>Posts from The Carroll's Yes Year 2022 | Adventure | Hiking | Travel | Food</title>
 </head>
 <% layout('/layouts/boilerplate') %>
-
-<h1>Posts:</h1>
-    <% for(let post of posts) { %> 
-    <div class="card text-center mb-3">
-      <div class="card-body">
-        <a href="/post/<%=post._id%>"><%= post.title%> - by <%= post.name%></a>
-       </div>
-    </div>
-    <% } %>
+  <div class="container-fluid p-3">
+    <h1>Posts:</h1>
+    <% for(let post of posts) { %>
+      <div class="card text-center mb-3">
+        <div class="card-body">
+          <a href="/posts/<%=post._id%>">
+            <%= post.title%> - by <%= post.name%>
+          </a>
+        </div>
+      </div>
+  </div>
+  <% } %>

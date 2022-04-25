@@ -1,66 +1,61 @@
 const express = require('express')
 const app = express();
+// const session = require('express-session')
+
+const bp = require('body-parser')
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
+
 const path = require('path')
 const engine = require('ejs-mate')
+
 const connectDB = require('./config/db')
-const Post = require('./models/post')
+
+const passport = require('passport')
+const local = require('passport-local')
+const User = require('./models/user')
+
+const postRoutes = require('./routes/posts')
+const loginRoutes = require('./routes/login')
+
 const methodOverride = require('method-override')
 
-app.use(methodOverride('_method'))
 connectDB()
+
+
+// const sessionConfig = {
+//   secret: 'temporarysecret',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     httpOnly: true,
+//     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+//     maxAge: 1000 * 60 * 60 * 24 * 7
+//   }
+// }
+
+// app.use(session(sessionConfig));
+app.use(methodOverride('_method'))
+
+// app.use(passport.initialize())
+// app.use(passport.session())
+// passport.use(new local(User.authenticate()))
+
+// passport.serializeUser(User.serializeUser())
+// passport.deserializeUser(User.deserializeUser())
 
 app.engine('ejs', engine)
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-app.use(express.urlencoded({ extended: true }));
+
 
 app.use(express.static(__dirname + '/public'));
 
+app.use('/posts', postRoutes)
+app.use('/login', loginRoutes)
+
 app.get('/', (req, res) => {
-  res.render('posts/home')
-})
-
-app.get('/posts', async (req, res) => {
-  const posts = await Post.find({})
-  res.render('posts/index', { posts })
-})
-
-app.get('/posts/new', (req, res) => {
-  res.render('posts/new')
-})
-
-app.get('/posts/login', (req, res) => {
-  res.render('posts/login')
-})
-
-app.get('/post/:id/edit', async (req, res) => {
-  const { id } = req.params
-  const post = await Post.findById(id)
-  res.render('posts/edit', { post })
-})
-
-app.post('/posts', async (req, res) => {
-  const p = new Post(req.body)
-  await p.save()
-  res.redirect(`/post/${p.id}`)
-})
-
-app.get('/post/:id', async (req, res) => {
-  const { id } = req.params
-  const post = await Post.findById(id)
-  res.render('posts/show', { post })
-})
-
-app.put('/post/:id', async (req, res) => {
-  const { id } = req.params
-  const post = await Post.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
-  res.redirect(`/post/${post._id}`)
-})
-
-app.delete('/post/:id', async (req, res) => {
-  const { id } = req.params
-  const post = await Post.findByIdAndDelete(id)
-  res.redirect('/posts')
+  res.render('home/home')
 })
 
 app.listen(process.env.PORT || 3000, () => {
