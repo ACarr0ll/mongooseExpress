@@ -3,17 +3,16 @@ const router = express.Router()
 const Post = require('../models/post')
 const LocalStrategy = require('passport-local');
 const passport = require('passport')
+const flash = require('connect-flash')
+const { isLoggedIn } = require('../middleware')
+
 router.get('/', async (req, res) => {
   const posts = await Post.find({})
   res.render('posts/index', { posts })
 })
 
-router.get('/new', (req, res) => {
-  if (!req.isAuthenticated()) {
-    res.send("Please register to create a new request!")
-  } else {
-    res.render('posts/new')
-  }
+router.get('/new', isLoggedIn, (req, res) => {
+  res.render('posts/new')
 })
 
 router.get('/:id/edit', async (req, res) => {
@@ -29,9 +28,13 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  const { id } = req.params
-  const post = await Post.findById(id)
-  res.render('posts/show', { post })
+  const post = await Post.findById(req.params.id)
+  if (!post) {
+    req.flash('error', 'Unable to locate post! Please go back and try again.')
+    res.redirect('/posts/')
+  } else {
+    res.render('posts/show', { post })
+  }
 })
 
 router.put('/:id', async (req, res) => {

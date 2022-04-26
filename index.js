@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const session = require('express-session')
+const flash = require('connect-flash')
 // app.use(bodyParser.json());
 
 //Setup cookie using sessionConfig
@@ -16,6 +17,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
 }));
+app.use(flash())
 
 //Import Database connection and connect
 const connectDB = require('./config/db')
@@ -50,6 +52,12 @@ app.set('view engine', 'ejs')
 //Setup static images, css and static items
 app.use(express.static(__dirname + '/public'));
 
+//
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success')
+  res.locals.error = req.flash('error')
+  next()
+})
 //Set the app to use post routes and login routes
 app.use('/posts', postRoutes)
 app.use('/login', loginRoutes)
