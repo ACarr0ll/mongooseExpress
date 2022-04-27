@@ -10,6 +10,8 @@ const session = require('express-session')
 const flash = require('connect-flash')
 // app.use(bodyParser.json());
 
+const ExpressError = require('./utils/ExpressError')
+
 //Setup cookie using sessionConfig
 app.use(session({
   secret: 'thisisasecret',
@@ -50,9 +52,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 //Setup static images, css and static items
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname + '/public')));
 
-//
 app.use((req, res, next) => {
   res.locals.success = req.flash('success')
   res.locals.error = req.flash('error')
@@ -66,7 +67,6 @@ app.use('/login', loginRoutes)
 app.get('/', (req, res) => {
   res.render('home/home')
 })
-
 
 //Listen for request on port determined by Heroku
 app.listen(process.env.PORT || 3000, () => {
