@@ -14,7 +14,7 @@ const ExpressError = require('./utils/ExpressError')
 
 //Setup cookie using sessionConfig
 app.use(session({
-  secret: 'thisisasecret',
+  secret: process.env.secretcookie,
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
