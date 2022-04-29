@@ -6,13 +6,15 @@ const { isLoggedIn } = require('../middleware')
 
 
 
-router.get('/', (req, res) => {
+router.get('/login', (req, res) => {
   res.render('login/login')
 })
 
-router.post('/', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
   req.flash('success', "Logged in successfully!")
-  res.redirect('/posts')
+  const redirectUrl = req.session.returnTo || '/posts'
+  delete req.session.returnTo
+  res.redirect(redirectUrl)
 })
 
 router.get('/register', (req, res) => {
@@ -22,10 +24,15 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res, next) => {
   const { username, password, email } = req.body
   const user = new User({ username: username, email: email });
-  await user.setPassword(password);
-  await user.save();
-  req.flash('success', "Successfully added user!")
-  res.redirect('/login')
+  if (User.find(email)) {
+    console.log("already exists")
+  }
+  const registeredUser = await User.register(user, password)
+  req.login(registeredUser, err => {
+    if (err) return next(err)
+    req.flash('success', "Successfully added user!")
+    res.redirect('/posts')
+  })
 })
 
 router.get('/logout', (req, res) => {

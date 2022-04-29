@@ -1,17 +1,14 @@
-const Joi = require('joi')
-
+const Post = require('./models/post')
 
 //Login validation
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
+    req.session.returnTo = req.originalUrl
     req.flash('error', 'Please sign in!')
     return res.redirect('/login')
   }
   next()
 }
-
-//Joi schema
-
 
 // Is valid post id validation
 module.exports.isValidPost = async (req, res, next) => {
@@ -20,8 +17,8 @@ module.exports.isValidPost = async (req, res, next) => {
     req.flash('error', 'Invalid Post URL')
     return res.redirect('/posts')
   }
-  const post = await Post.findById(id)
-  if (!post) {
+  req.post = await Post.findById(id).populate('author')
+  if (!req.post) {
     req.flash('error', 'No post found')
     return res.redirect('/posts')
   } else {

@@ -5,13 +5,23 @@
   <div class="container-fluid p-3">
     <h1>Edit a post!</h1>
     <form action="/posts/<%=post._id%>?_method=PUT" method="post">
-      <label for="name">Username</label>
-      <input type="text" name="name" id="name" placeholder="Username" value="<%=post.name%>"><br>
-      <label for="title">Title of Article</label>
-      <input type="text" name="title" id="title" placeholder="Title" value="<%=post.title%>"><br>
-      <label for="body">Enter article body</label>
-      <textarea name="body" id="body" cols="30" rows="10" placeholder="Enter post body"><%=post.body%></textarea><br>
-      <button type="submit">Update Post</button>
+      <div class="mb-3">
+        <label for="name">Author</label>
+        <span name="name">
+          <%= post.author %>
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="title">Title of Article</label>
+        <input type="text" name="title" id="title" placeholder="Title" value="<%=post.title%>"><br>
+      </div>
+      <div class="mb-3">
+        <label for="body">Enter article body</label>
+        <textarea name="body" id="body" cols="30" rows="10" placeholder="Enter post body"><%=post.body%></textarea><br>
+      </div>
+      <div class="mb-3">
+        <button type="submit">Update Post</button>
+      </div>
     </form>
     <a href="/posts/<%=post._id%>">Cancel</a>
   </div>

@@ -1,6 +1,7 @@
 <head>
   <title>
-    <%= post.title %> - by <%= post.name %> | The Carroll's Yes Year 2022 | Adventure | Hiking | Travel | Food
+    <%= post.title %> - by <%= post.author.username %> | The Carroll's Yes Year 2022 | Adventure | Hiking | Travel |
+        Food
   </title>
 </head>
 <% layout('/layouts/boilerplate') %>
@@ -8,7 +9,7 @@
     <div class="card text-center">
       <div class="card-header">
         <h5>
-          <%= post.title %> - by <%= post.name %>
+          <%= post.title %> - by <%= post.author.username %>
         </h5>
       </div>
       <div class="card-body">

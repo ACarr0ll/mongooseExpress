@@ -11,16 +11,20 @@
           <a class="nav-link" href="/posts">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/posts/new">Create a post!</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <% if(currentUser) {%>
+            <a class="nav-link" href="/posts/new">Create a post!</a>
+            <% } %>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success disabled" type="submit">Search</button>
-      </form>
+      <div class="navbar-nav ml-auto">
+        <% if(!currentUser) {%>
+          <a href="/login" class="nav-link">Login</a>
+          <a href="/register" class="nav-link">Register</a>
+          <% } else { %>
+            <a href="/profile" class="nav-link disabled"> Welcome Back <%= currentUser.username %>!</a>
+            <a href=" /logout" class="nav-link">Logout</a>
+            <% } %>
+      </div>
     </div>
   </div>
 </nav>

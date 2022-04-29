@@ -8,7 +8,7 @@ const passport = require('passport')
 
 
 router.get('/', async (req, res, next) => {
-  const posts = await Post.find({})
+  const posts = await Post.find({}).populate('author')
   res.render('posts/index', { posts })
 })
 
@@ -22,28 +22,19 @@ router.get('/:id/edit', isLoggedIn, async (req, res, next) => {
   res.render('posts/edit', { post })
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isLoggedIn, async (req, res, next) => {
   const p = new Post(req.body)
+  p.author = req.user._id
   await p.save()
   res.redirect(`/posts/${p.id}`)
 })
 
-router.get('/:id', async (req, res, next) => {
-  const { id } = req.params
-  if (id.length < 24 || id.length > 24) {
-    req.flash('error', 'Invalid Post URL')
-    res.redirect('/posts')
-  }
-  const post = await Post.findById(id)
-  if (!post) {
-    req.flash('error', 'No post found')
-    res.redirect('/posts')
-  } else {
-    res.render('posts/show', { post })
-  }
+router.get('/:id', isValidPost, async (req, res, next) => {
+  const post = req.post
+  res.render('posts/show', { post })
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isLoggedIn, async (req, res, next) => {
   const { id } = req.params
   const post = await Post.findByIdAndUpdate(id, req.body, { runValidators: true, new: true })
   res.redirect(`/posts/${post._id}`)

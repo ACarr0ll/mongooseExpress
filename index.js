@@ -57,11 +57,12 @@ app.use(express.static(path.join(__dirname + '/public')));
 app.use((req, res, next) => {
   res.locals.success = req.flash('success')
   res.locals.error = req.flash('error')
+  res.locals.currentUser = req.user
   next()
 })
 //Set the app to use post routes and login routes
 app.use('/posts', postRoutes)
-app.use('/login', loginRoutes)
+app.use('/', loginRoutes)
 
 //Setup the home page
 app.get('/', (req, res) => {

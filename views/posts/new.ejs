@@ -7,8 +7,7 @@
 
     <form action="/posts" method="post">
       <div class="mb-3">
-        <label for="name" class="form-label">Username</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="Username">
+        <label class="form-label" name="author" id="author">Author - <%= currentUser.username %></label>
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">Title of Article</label>
